@@ -5,6 +5,9 @@
 
     <dimen name="txt_generated_margin">24dp</dimen>
     <dimen name="btn_margin">16dp</dimen>
+    <dimen name="btn_share_margin">8dp</dimen>
+
+    <dimen name="btn_floating_action_dimen">56dp</dimen>
 
     <dimen name="txt_size_newfad_generated">24sp</dimen>
     <dimen name="txt_size_btn_newfad_generate">18sp</dimen>

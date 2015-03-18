@@ -1,12 +1,15 @@
 <resources>
+    <!-- Facebook APP ID -->
+    <string name="app_id">1417900721855314</string>
+
     <string name="app_name">Newfad Generator</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string name="btn_txt_newfad_generate"><u>Nah. Give me another one.</u></string>
-    <string name="btn_txt_newfad_tweet"><u>Oh shit this is cool. Let me tweet my homies about this.</u></string>
-    <string name="txt_tweet_phrase_1">For our next meetup, I\'ll do a talk about</string>
-    <string name="txt_tweet_phrase_2">and why you should do it too.</string>
+    <string name="txt_share_phrase_1">For our next meetup, I\'ll do a talk about</string>
+    <string name="txt_share_phrase_2">and why you should do it too.</string>
+    <string name="txt_share_email_subject">Our topic later</string>
     <string name="btn_txt_about">About</string>
     <string name="txt_about">App base from the design of keikun17\'s Newfad Generator.
         \nApp\'s source - to be published on Github.

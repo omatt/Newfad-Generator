@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">Newfad Generator</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="btn_txt_newfad_generate"><u>Nah. Give me another one.</u></string>
+    <string name="btn_txt_newfad_tweet"><u>Oh shit this is cool. Let me tweet my homies about this.</u></string>
+    <string name="txt_tweet_phrase_1">For our next meetup, I\'ll do a talk about</string>
+    <string name="txt_tweet_phrase_2">and why you should do it too.</string>
+    <string name="btn_txt_about">About</string>
+    <string name="txt_about">App base from the design of keikun17\'s Newfad Generator.
+        \nApp\'s source - to be published on Github.
+        \n\nOmatt
+    </string>
+    <string name="txt_about_close">Close</string>
+
+    <string-array name="first_word">
+        <item>Agile</item>
+        <item>Behaviour</item>
+        <item>Big</item>
+        <item>Collective</item>
+        <item>Convention</item>
+        <item>Decentralized</item>
+        <item>Domain</item>
+        <item>Extreme</item>
+        <item>Feature</item>
+        <item>Gender-equality</item>
+        <item>Intellectual</item>
+        <item>Lean</item>
+        <item>LSD</item>
+        <item>No-Retreat-No-Surrender</item>
+        <item>Pair</item>
+        <item>Rational</item>
+        <item>Requirement</item>
+        <item>Reversible</item>
+        <item>Small</item>
+        <item>Sentient</item>
+        <item>Spiral</item>
+        <item>Sustainable</item>
+        <item>Test</item>
+        <item>Unified</item>
+        <item>User</item>
+        <item>Yoga</item>
+    </string-array>
+
+    <string-array name="second_word">
+        <item>Driven</item>
+        <item>Focused</item>
+        <item>Learning</item>
+        <item>Over</item>
+        <item>Programming</item>
+        <item>Release</item>
+    </string-array>
+
+    <string-array name="third_word">
+        <item>Design</item>
+        <item>Development</item>
+        <item>DEVOPS</item>
+        <item>Estimation</item>
+        <item>Machine</item>
+        <item>Methodology</item>
+        <item>Prototyping</item>
+        <item>Stories</item>
+        <item>Test</item>
+        <item>UX</item>
+    </string-array>
+</resources>

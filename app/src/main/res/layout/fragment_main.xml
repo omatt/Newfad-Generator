@@ -1,0 +1,51 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+
+    <TextView
+        android:id="@+id/tv_newfad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_newfad_generate"
+        android:layout_alignLeft="@+id/btn_newfad_generate"
+        android:layout_alignStart="@+id/btn_newfad_generate"
+        android:text="@string/hello_world"
+        android:textSize="@dimen/txt_size_newfad_generated"/>
+
+    <TextView
+        android:id="@+id/btn_newfad_generate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/txt_generated_margin"
+        android:text="@string/btn_txt_newfad_generate"
+        android:textSize="@dimen/txt_size_btn_newfad_generate"/>
+
+    <TextView
+        android:id="@+id/btn_newfad_tweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_newfad_generate"
+        android:layout_below="@+id/btn_newfad_generate"
+        android:layout_marginTop="@dimen/btn_margin"
+        android:text="@string/btn_txt_newfad_tweet"
+        android:textSize="@dimen/txt_size_btn_newfad_generate"/>
+
+    <TextView
+        android:id="@+id/btn_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_txt_about"/>
+
+</RelativeLayout>

@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class AnalyticsMedium extends Application {
     // The following line should be changed to include the correct property id.
-    private static final String PROPERTY_ID = "UA-60354818-1";
+    private static final String PROPERTY_ID = "UA-60354818-2";
 
     public static int GENERAL_TRACKER = 0;
 

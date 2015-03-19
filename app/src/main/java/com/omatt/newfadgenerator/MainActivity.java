@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.omatt.newfadgenerator.analytics.AnalyticsMedium;
@@ -54,6 +55,21 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+    }
+
+    @Override
+    public void onStart() {
+        // Get an Analytics tracker to report app starts &amp; uncaught
+        // exceptions etc.
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        // Stop the analytics tracking
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
     @Override
@@ -117,8 +133,9 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment implements OnClickListener {
         private static final String TAG = "MainFragment";
+        private static final String KEY_NEWFAD = "NEWFAD";
         private String[] firstWord, secondWord, thirdWord;
-        private TextView mTextViewNewFad, mBtnGenerateNewfad, mBtnTweet, mBtnAbout;
+        private TextView mTextViewNewFad, mBtnGenerateNewfad, mBtnAbout;
         private ImageButton mBtnShare, mBtnShareFB, mBtnShareTwitter, mBtnShareSMS, mBtnShareEmail;
         private LinearLayout layoutShare;
 
@@ -155,9 +172,16 @@ public class MainActivity extends ActionBarActivity {
             mBtnAbout = (TextView) rootView.findViewById(R.id.btn_about);
             mBtnAbout.setOnClickListener(this);
 
-            mTextViewNewFad.setText(generateNewFad());
+            if(savedInstanceState != null) mTextViewNewFad.setText(savedInstanceState.getString(KEY_NEWFAD));
+            else mTextViewNewFad.setText(generateNewFad());
 
             return rootView;
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle savedInstanceState) {
+            super.onSaveInstanceState(savedInstanceState);
+            savedInstanceState.putString(KEY_NEWFAD, mTextViewNewFad.getText().toString());
         }
 
         @Override
@@ -200,12 +224,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         private String generateShareMessage(String newfad) {
-            StringBuilder mStringBuilderShare = new StringBuilder();
-            mStringBuilderShare.append(getResources().getString(R.string.txt_share_phrase_1));
-            mStringBuilderShare.append(" " + newfad + " ");
-            mStringBuilderShare.append(getResources().getString(R.string.txt_share_phrase_2));
-
-            return mStringBuilderShare.toString();
+            return getResources().getString(R.string.txt_share_phrase_1) + " " + newfad + " "
+                    + getResources().getString(R.string.txt_share_phrase_2);
         }
 
         private void showAbout() {
@@ -237,7 +257,7 @@ public class MainActivity extends ActionBarActivity {
             }
         }
 
-        private void shareFacebookNewfad(String shareFacebook){
+        private void shareFacebookNewfad(String shareFacebook) {
             if (FacebookDialog.canPresentShareDialog(getActivity(), FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
                 // Publish the post using the Share Dialog
                 FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity()).setDescription(shareFacebook).setLink("http://keikun17.github.io/newfad-generator/").build();

@@ -4,7 +4,7 @@ Methodology Buzzword Generator
 
 [![Get it on Google Play](http://www.android.com/images/brand/get_it_on_play_logo_small.png)](https://play.google.com/store/apps/details?id=com.omatt.newfadgenerator)
 
-This project was made out of fun and is based from [keikun17's](https://github.com/keikun17) [newfad generator](keikun17.github.io/newfad-generator/) that's also available at [Github](https://github.com/keikun17/newfad-generator). 
+This project was made out of fun and is based from [keikun17's](https://github.com/keikun17) [newfad generator](https://keikun17.github.io/newfad-generator/) that's also available at [Github](https://github.com/keikun17/newfad-generator). 
 
 Requirements
 --------

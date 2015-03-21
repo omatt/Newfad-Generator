@@ -31,13 +31,14 @@ Generate your own Google Analytics [Tracking ID](https://www.google.com/analytic
     <string name="ga_trackingId">UA-########-#</string>
 </resources>
 ```
-    
 `com/omatt/newfadgenerator/analytics/AnalyticsMedium.java`
 ```java
 private static final String PROPERTY_ID = "UA-########-#";
 ```
 
 Generate your own [Facebok APP_ID](https://developers.facebook.com/apps/) and replace the id in:
+
+`res/values/strings.xml`
 ```xml
 <!-- Facebook APP ID -->
 <string name="app_id">Place the app_id here</string>

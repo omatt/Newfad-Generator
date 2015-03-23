@@ -6,6 +6,44 @@ Methodology Buzzword Generator
 
 This project was made out of fun and is based from [keikun17's](https://github.com/keikun17) [newfad generator](https://keikun17.github.io/newfad-generator/) that's also available at [Github](https://github.com/keikun17/newfad-generator). 
 
+Generate your own Google Analytics [Tracking ID](https://www.google.com/analytics/) and replace the ids in:
+
+`res/xml/ecommerce_tracker.xml`
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="ga_sessionTimeout">60</integer>
+    <!--  The following value should be replaced with correct property id. -->
+    <string name="ga_trackingId">UA-########-#</string>
+</resources>
+```
+`res/xml/global_tracker.xml`
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="ga_sessionTimeout">300</integer>
+    <bool name="ga_autoActivityTracking">true</bool>
+    
+    <!-- The screen names that will appear in reports -->
+    <screenName name="com.omatt.newfadgenerator.MainActivity">Newfad Generator</screenName>
+    
+    <!-- The following value should be replaced with correct property id. -->
+    <string name="ga_trackingId">UA-########-#</string>
+</resources>
+```
+`com/omatt/newfadgenerator/analytics/AnalyticsMedium.java`
+```java
+private static final String PROPERTY_ID = "UA-########-#";
+```
+
+Generate your own [Facebok APP_ID](https://developers.facebook.com/apps/) and replace the id in:
+
+`res/values/strings.xml`
+```xml
+<!-- Facebook APP ID -->
+<string name="app_id">Place the app_id here</string>
+```
+
 Requirements
 --------
 Android Studio 1.1.0

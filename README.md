@@ -52,15 +52,15 @@ Java SDK (jdk1.7.0_51)
 
 Android SDK Tools 24.1.2
 
-Android SDK Build-tools 21.1.2
+Android SDK Build-tools 22.0.1
 
 Minimum Target API 15; Target API 22
 
 Dependencies
 --------
-'com.android.support:appcompat-v7:21.0.3'
+'com.android.support:appcompat-v7:22.0.0'
 
-'com.google.android.gms:play-services:6.5.87'
+'com.google.android.gms:play-services:7.0.0'
 
 'com.facebook.android:facebook-android-sdk:3.23.1'
 

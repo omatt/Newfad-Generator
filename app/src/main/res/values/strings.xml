@@ -1,6 +1,6 @@
 <resources>
     <!-- Facebook APP ID -->
-    <string name="app_id">1417900721855314</string>
+    <string name="facebook_app_id">1417900721855314</string>
 
     <string name="app_name">Newfad Generator</string>
     <string name="hello_world">Hello world!</string>

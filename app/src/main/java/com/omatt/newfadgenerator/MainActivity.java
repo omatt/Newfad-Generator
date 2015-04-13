@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,8 +19,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.FacebookDialog;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -37,7 +37,6 @@ import static com.omatt.newfadgenerator.analytics.AnalyticsMedium.TrackerName;
 
 
 public class MainActivity extends ActionBarActivity {
-    private static UiLifecycleHelper uiHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,8 @@ public class MainActivity extends ActionBarActivity {
         this.getSupportActionBar().hide();
 
         GenLib.generateHashKey(this);
-        uiHelper = new UiLifecycleHelper(this, null);
-        uiHelper.onCreate(savedInstanceState);
+        // Initialize Facebook SDK
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -75,25 +74,21 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        uiHelper.onResume();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        uiHelper.onSaveInstanceState(outState);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        uiHelper.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        uiHelper.onDestroy();
     }
 
     @Override
@@ -138,6 +133,7 @@ public class MainActivity extends ActionBarActivity {
         private TextView mTextViewNewFad, mBtnGenerateNewfad, mBtnAbout;
         private ImageButton mBtnShare, mBtnShareFB, mBtnShareTwitter, mBtnShareSMS, mBtnShareEmail;
         private LinearLayout layoutShare;
+        private ShareDialog mShareDialog;
 
         public PlaceholderFragment() {
         }
@@ -146,6 +142,8 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            mShareDialog = new ShareDialog(this);
 
             startScreenTrack(getActivity().getApplication(), TAG, TrackerName.APP_TRACKER);
 
@@ -258,10 +256,14 @@ public class MainActivity extends ActionBarActivity {
         }
 
         private void shareFacebookNewfad(String shareFacebook) {
-            if (FacebookDialog.canPresentShareDialog(getActivity(), FacebookDialog.ShareDialogFeature.SHARE_DIALOG)) {
-                // Publish the post using the Share Dialog
-                FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity()).setDescription(shareFacebook).setLink("http://keikun17.github.io/newfad-generator/").build();
-                uiHelper.trackPendingDialogCall(shareDialog.present());
+            if (ShareDialog.canShow(ShareLinkContent.class)) {
+                ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentDescription(shareFacebook)
+                        .setContentUrl(Uri.parse("http://keikun17.github.io/newfad-generator/"))
+                        .build();
+
+                mShareDialog.show(linkContent);
             } else {
                 Intent intentFacebook = new Intent(Intent.ACTION_VIEW);
                 intentFacebook.setType("text/plain");

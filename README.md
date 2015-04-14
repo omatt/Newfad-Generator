@@ -62,7 +62,7 @@ Dependencies
 
 'com.google.android.gms:play-services:7.0.0'
 
-'com.facebook.android:facebook-android-sdk:3.23.1'
+'com.facebook.android:facebook-android-sdk:4.0.1'
 
 <h2>Copyright</h2>
     Copyright © 2015 Omar Matthew Reyes

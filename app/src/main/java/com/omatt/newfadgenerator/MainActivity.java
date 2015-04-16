@@ -28,6 +28,8 @@ import com.google.android.gms.analytics.Tracker;
 import com.omatt.newfadgenerator.analytics.AnalyticsMedium;
 import com.omatt.newfadgenerator.lib.Animate;
 import com.omatt.newfadgenerator.lib.GenLib;
+import com.omatt.newfadgenerator.utils.GlobalValues;
+import com.omatt.newfadgenerator.utils.ShareManager;
 
 import java.util.List;
 import java.util.Random;
@@ -170,7 +172,8 @@ public class MainActivity extends ActionBarActivity {
             mBtnAbout = (TextView) rootView.findViewById(R.id.btn_about);
             mBtnAbout.setOnClickListener(this);
 
-            if(savedInstanceState != null) mTextViewNewFad.setText(savedInstanceState.getString(KEY_NEWFAD));
+            if (savedInstanceState != null)
+                mTextViewNewFad.setText(savedInstanceState.getString(KEY_NEWFAD));
             else mTextViewNewFad.setText(generateNewFad());
 
             return rootView;
@@ -195,16 +198,16 @@ public class MainActivity extends ActionBarActivity {
                     Animate.fadeInLayout(layoutShare, layoutShare.getVisibility() == View.VISIBLE);
                     break;
                 case R.id.btn_share_fb:
-                    shareFacebookNewfad(generateShareMessage(mTextViewNewFad.getText().toString()));
+                    ShareManager.shareFacebookNewfad(getActivity(), mShareDialog, generateShareMessage(mTextViewNewFad.getText().toString()));
                     break;
                 case R.id.btn_share_twitter:
-                    shareTweetNewfad(generateShareMessage(mTextViewNewFad.getText().toString()));
+                    ShareManager.shareTweetNewfad(getActivity(), generateShareMessage(mTextViewNewFad.getText().toString()));
                     break;
                 case R.id.btn_share_sms:
-                    shareSMSNewfad(generateShareMessage(mTextViewNewFad.getText().toString()));
+                    ShareManager.shareSMSNewfad(getActivity(), generateShareMessage(mTextViewNewFad.getText().toString()));
                     break;
                 case R.id.btn_share_email:
-                    shareEmailNewfad(generateShareMessage(mTextViewNewFad.getText().toString()));
+                    ShareManager.shareEmailNewfad(getActivity(), generateShareMessage(mTextViewNewFad.getText().toString()));
                     break;
             }
         }
@@ -239,73 +242,6 @@ public class MainActivity extends ActionBarActivity {
 
             AlertDialog alert = builder.create();
             alert.show();
-        }
-
-        private void shareEmailNewfad(String shareEmail) {
-
-            Intent intentEmail = new Intent(Intent.ACTION_SEND);
-            intentEmail.setType("message/rfc822");
-            intentEmail.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.txt_share_email_subject));
-            intentEmail.putExtra(Intent.EXTRA_TEXT, shareEmail);
-
-            try {
-                startActivity(Intent.createChooser(intentEmail, "Send Email"));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Log.e(TAG, "No email clients installed");
-            }
-        }
-
-        private void shareFacebookNewfad(String shareFacebook) {
-            if (ShareDialog.canShow(ShareLinkContent.class)) {
-                ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                        .setContentTitle(getString(R.string.app_name))
-                        .setContentDescription(shareFacebook)
-                        .setContentUrl(Uri.parse("http://keikun17.github.io/newfad-generator/"))
-                        .build();
-
-                mShareDialog.show(linkContent);
-            } else {
-                Intent intentFacebook = new Intent(Intent.ACTION_VIEW);
-                intentFacebook.setType("text/plain");
-                intentFacebook.putExtra(android.content.Intent.EXTRA_TEXT, "Share via Facebook");
-
-                List<ResolveInfo> matchFacebook = getActivity().getPackageManager().queryIntentActivities(intentFacebook, 0);
-                for (ResolveInfo info : matchFacebook) {
-                    if ((info.activityInfo.name).contains("facebook")) {
-                        intentFacebook.setPackage(info.activityInfo.packageName);
-                    }
-                }
-                startActivity(intentFacebook);
-            }
-        }
-
-        private void shareSMSNewfad(String shareSMS) {
-
-            Intent intentMessage = new Intent(Intent.ACTION_VIEW);
-            intentMessage.setType("vnd.android-dir/mms-sms");
-            intentMessage.setData(Uri.parse("sms:"));
-            intentMessage.putExtra("sms_body", shareSMS);
-            try {
-                startActivity(intentMessage);
-            } catch (android.content.ActivityNotFoundException ex) {
-                Log.e(TAG, "No sms clients installed");
-            }
-        }
-
-        private void shareTweetNewfad(String shareTweet) {
-
-            // Create intent using ACTION_VIEW and a normal Twitter url:
-            String tweetUrl = String.format("https://twitter.com/intent/tweet?text=%s&url=%s", GenLib.urlEncode(shareTweet), GenLib.urlEncode(""));
-            Intent intentTwitter = new Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl));
-
-            // Narrow down to official Twitter app, if available:
-            List<ResolveInfo> matchTwitter = getActivity().getPackageManager().queryIntentActivities(intentTwitter, 0);
-            for (ResolveInfo info : matchTwitter) {
-                if (info.activityInfo.packageName.toLowerCase().startsWith("com.twitter")) {
-                    intentTwitter.setPackage(info.activityInfo.packageName);
-                }
-            }
-            startActivity(intentTwitter);
         }
     }
 }
